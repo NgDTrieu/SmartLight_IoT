@@ -5,7 +5,6 @@ import sys
 import threading
 
 # --- CẤU HÌNH ---
-# Lưu ý: Kiểm tra lại cổng COM trong Device Manager nếu nạp code xong nó bị đổi
 SERIAL_PORT = 'COM3' 
 BAUD_RATE = 115200
 
@@ -20,11 +19,11 @@ try:
     print(f"🔌 Dang ket noi Serial {SERIAL_PORT}...")
     ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=0.05)
     
-    # QUAN TRỌNG: Thả chân DTR/RTS để không làm ESP32 bị Reset liên tục
+    # Thả chân DTR/RTS để không làm ESP32 bị Reset liên tục
     ser.dtr = False
     ser.rts = False
     
-    time.sleep(1) # Đợi 1 chút cho ổn định
+    time.sleep(1) 
     print(f"✅ Da mo cong {SERIAL_PORT} thanh cong!")
 except Exception as e:
     print(f"❌ Khong the mo cong COM: {e}")
@@ -85,7 +84,7 @@ try:
             except Exception as e:
                 print(f"⚠️ Loi doc Serial: {e}")
                 
-        time.sleep(0.01) # Nghỉ cực ngắn để giảm tải CPU
+        time.sleep(0.01) # Nghỉ ngắn để giảm tải CPU
 
 except KeyboardInterrupt:
     print("\n🛑 Dung chuong trinh...")
